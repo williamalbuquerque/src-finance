@@ -8,8 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 export class UserService {
     constructor(private readonly usersRepository: UserRepository) {}
 
-    async getUserById(userId: string): Promise<User> {
-        return this.usersRepository.findOne({ userId })
+    async getUserById(_id: string): Promise<User> {
+        return this.usersRepository.findOne({ _id })
     }
 
     async getUsers(): Promise<User[]> {

@@ -8,8 +8,8 @@ export class UserController {
   constructor(private readonly usersService: UserService) {}
 
   @Get(':userId')
-  async getUser(@Param('userId') userId: string): Promise<User> {
-    return this.usersService.getUserById(userId);
+  async getUser(@Param('userId') _id: string): Promise<User> {
+    return this.usersService.getUserById(_id);
   }
 
   @Get()
