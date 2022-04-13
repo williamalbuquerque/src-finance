@@ -24,8 +24,8 @@ export class UserController {
   }
 
   @Patch(':userId')
-  async updateUser(@Param('userId') userId: string, @Body() updateUserDto: UserDto): Promise<User> {
-      return this.usersService.updateUser(userId, updateUserDto);
+  async updateUser(@Param('userId') _id: string, @Body() updateUserDto: UserDto): Promise<User> {
+      return this.usersService.updateUser(_id, updateUserDto);
   }
 
   @UseGuards(AuthGuard('local'))

@@ -26,8 +26,8 @@ export class UserService {
         })
     }
 
-    async updateUser(userId: string, userUpdates: UserDto): Promise<User> {
-        return this.usersRepository.findOneAndUpdate({ userId }, userUpdates);
+    async updateUser(_id: string, userUpdates: UserDto): Promise<User> {
+        return this.usersRepository.findOneAndUpdate({ _id }, userUpdates);
     }
 
     async validateUser(email: string, password: string): Promise<any> {
