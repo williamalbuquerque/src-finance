@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Param, Patch, Post, Delete } from '@nestjs/common';
 import { TagService } from '../services/tag.service';
 import { Tag } from '../schemas/tag.schema';
-import { TagDto } from '../dto/tag.dto';
 
 @Controller('tags')
 export class TagController {
@@ -18,13 +17,15 @@ export class TagController {
   }
 
   @Post('create') 
-  async createTag(@Body() createTagDto: TagDto): Promise<Tag> {
-      return this.tagService.createTag(createTagDto.name, createTagDto.user_id);
+  async createTag(
+    @Body() tagObj: Tag
+  ): Promise<Tag> {
+      return this.tagService.createTag(tagObj.name, tagObj.user_id);
   }
 
   @Patch(':tagId')
-  async updateTag(@Param('tagId') _id: string, @Body() updateTagDto: TagDto): Promise<Tag> {
-      return this.tagService.updateTag(_id, updateTagDto);
+  async updateTag(@Param('tagId') _id: string, @Body() tagObj: Tag): Promise<Tag> {
+      return this.tagService.updateTag(_id, tagObj);
   }
 
   @Delete(':tagId')

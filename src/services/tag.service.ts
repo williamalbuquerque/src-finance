@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { TagDto } from "../dto/tag.dto";
 import { Tag } from "../schemas/tag.schema";
 import { TagRepository } from "../repositories/tag.repository";
 import { v4 as uuidv4 } from 'uuid';
@@ -17,14 +16,13 @@ export class TagService {
     }
 
     async createTag(name: string, user_id: string): Promise<Tag> {
-        return this.tagsRepository.create({
-          _id: uuidv4(),
+        return this.tagsRepository.create({          
           name,  
           user_id
         })
     }
 
-    async updateTag(_id: string, tagUpdates: TagDto): Promise<Tag> {
+    async updateTag(_id: string, tagUpdates: Tag): Promise<Tag> {
         return this.tagsRepository.findOneAndUpdate({ _id }, tagUpdates);
     } 
     

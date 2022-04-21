@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param, Patch, Post, UseGuards, Request } from '@
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from '../services/user.service';
 import { User } from '../schemas/user.schema';
-import { UserDto } from '../dto/user.dto';
 
 @Controller('users')
 export class UserController {
@@ -19,13 +18,13 @@ export class UserController {
   }
 
   @Post('register') 
-  async createUser(@Body() createUserDto: UserDto): Promise<User> {
-      return this.usersService.createUser(createUserDto.name, createUserDto.email, createUserDto.password);
+  async createUser(@Body() userObj: User): Promise<User> {
+      return this.usersService.createUser(userObj.name, userObj.email, userObj.password);
   }
 
   @Patch(':userId')
-  async updateUser(@Param('userId') _id: string, @Body() updateUserDto: UserDto): Promise<User> {
-      return this.usersService.updateUser(_id, updateUserDto);
+  async updateUser(@Param('userId') _id: string, @Body() userObj: User): Promise<User> {
+      return this.usersService.updateUser(_id, userObj);
   }
 
   @UseGuards(AuthGuard('local'))
